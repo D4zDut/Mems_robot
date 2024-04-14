@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- LOAD ROBOT DESCRIPTION -->
+    <include file="$(find robot_description)/launch/robot_description.launch"/>
+    
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_rviz)/rviz/model.rviz" output="screen"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <node name="ekf_localization" pkg="robot_localization" type="ekf_localization_node" >
+        <rosparam command="load" file="$(find robot_control)/config/localization.yaml" />
+    </node>
+
+</launch>
